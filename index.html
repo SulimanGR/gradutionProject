@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/main-page.css">
+	<meta charset="utf-8">
+    <title>Live Auction</title>
+    <img src="img/auction-logo-is-suitable-fitness-business-symbols_640381-219-removebg-preview.png" class="auction-logo"></a>
+</head>
+
+	<body class="live-auction">
+        <h1><u>Welcome to Live Auction website!</u></h1>
+        
+    
+        <a href="signup-page.html" class="go-to-signup">Sign up</a>
+        
+    <button onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
+
+    <div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'"
+        class="close" title="Close Modal">&times;</span>
+
+        <form class="modal-content animate">
+        <div class="imgcontainer">
+        <img src="img/auction-logo-is-suitable-fitness-business-symbols_640381-219-removebg-preview.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+        <label>
+        <input type="checkbox" checked="checked"> Remember me </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+	</body>
+    
+</html>
