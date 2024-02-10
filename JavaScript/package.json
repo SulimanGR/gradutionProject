@@ -1,0 +1,12 @@
+{
+  "name": "graduation-project",
+  "version": "1.0.0",
+  "description": "A simple Express.js application",
+  "main": "database.js",
+  "scripts": {
+    "start": "node database.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
