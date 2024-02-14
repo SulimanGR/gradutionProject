@@ -41,8 +41,14 @@ app.post('/signup', (req, res) => {
   });
 });
 
+// Serve the HTML page
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/signup-page.html'); // Change 'index.html' to the filename of your HTML page
+});
+
 // Start the server
 const port = 3000; // Use a different port than MySQL
 app.listen(port, () => {
   console.log('Server is running on port ' + port);
 });
+

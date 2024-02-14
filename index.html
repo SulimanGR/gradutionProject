@@ -6,13 +6,15 @@
 	<meta charset="utf-8">
     <title>Live Auction</title>
     <img src="img/auction-logo-is-suitable-fitness-business-symbols_640381-219-removebg-preview.png" class="auction-logo"></a>
+    <script src="/OOP.js"></script>
 </head>
 
 	<body class="live-auction">
-        <h1><u>Welcome to Live Auction website!</u></h1>
+        <h1 id="Live"><u>Welcome to Live Auction website!</u></h1>
         
     
         <a href="signup-page.html" class="go-to-signup">Sign up</a>
+        <a href="stream-page.html" class="go-to-stream">Stream Page</a>
         
     <button onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
 
@@ -43,6 +45,14 @@
     </div>
   </form>
 </div>
+<script>
+let event = document.getElementById('Live');
+
+event.addEventListener('click', function(){
+    alert('Welcome to Live Auction website!');
+});
+
+</script>
 	</body>
     
 </html>

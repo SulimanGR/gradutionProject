@@ -9,17 +9,17 @@
 
 <body class="signup-form">
     <a href="index.html"><img src="img/auction-logo-is-suitable-fitness-business-symbols_640381-219-removebg-preview.png" class="auction-logo"></a>
-    <form action="index.html" style="border:1px solid #ccc">
+    <form action="/signup" method="POST" style="border:1px solid #ccc">
         <div class="container">
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
             <hr>
 
             <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" required>
+            <input type="text" placeholder="Enter Email" name="email" required> <!-- Added name attribute -->
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" required>
+            <input type="password" placeholder="Enter Password" name="password" required> <!-- Added name attribute -->
 
             <label for="psw-repeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" required>

@@ -66,7 +66,43 @@
   width: 200px;
 }
 
+.go-to-stream{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 44px;
+  border-radius: 6px;
+  background-color: #29b474;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .8px;
+  text-decoration: none; /* removed the underline from the button*/
+  position: absolute; top: 40px; right: 1050px;
+}
 
+.go-to-stream:hover{    /*now the button is interact when you hover */
+  background-color: lightblue; 
+  height: 44px;
+  width: 200px;
+}
+
+#liveIframe {
+  position: absolute; right: 600px; top: 100px; left: auto; bottom: auto;
+  margin: auto 0;
+  height: 1000px; /* Corrected unit */
+  width: 1700px; /* Corrected unit */
+}
+
+.auction-live-chat{
+  position: absolute; right: 488px; top: 110px; left: auto; bottom: auto;
+  margin: auto 0;
+  height: 1000px; /* Corrected unit */
+  width: 500px; /* Corrected unit */
+
+}
 /* ---------------------------------------------------------------------this for the login button-------------------------------------------------------------------------- */
 .modal {
   display: none; /* Hidden by default */
