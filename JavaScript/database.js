@@ -1,5 +1,12 @@
 const express = require('express');
 const mysql = require('mysql');
+const { graphqlHTTP } = require('express-graphql');
+const { buildSchema } = require('graphql');
+const fs = require('fs');
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -22,33 +29,82 @@ connection.connect((err) => {
 });
 
 // Middleware to parse incoming request bodies
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Create a route to handle form submissions
-app.post('/signup', (req, res) => {
-  const { email, password } = req.body;
-
-  // Insert the submitted data into the database
-  const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
-  connection.query(sql, [email, password], (err, result) => {
+// Serve the HTML page
+app.get('/signup-page.html', (_, res) => {
+  const htmlPath = path.join(__dirname, 'signup-page.html');
+  fs.readFile(htmlPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error inserting data into database: ' + err.stack);
-      return res.status(500).send('Error inserting data into database');
+      console.error('Error reading HTML file: ' + err.stack);
+      return res.status(500).send('Error reading HTML file');
     }
-    console.log('Data inserted into database:', result);
-    res.send('Signup successful!');
+    res.send(data);
   });
 });
 
-// Serve the HTML page
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/signup-page.html'); // Change 'index.html' to the filename of your HTML page
+// Route to handle form submission
+app.post('/signup', (req, res) => {
+  const { email, password } = req.body;
+
+  // Insert user into MySQL database
+  connection.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, password], (error, results) => {
+    if (error) {
+      console.error('Error inserting user:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ email }, 'secretKey');
+
+    // Send response
+    res.status(201).json({ message: 'User signed up successfully', token });
+  });
 });
 
+// Define your GraphQL schema
+const schema = buildSchema(fs.readFileSync(path.join(__dirname,'graphql.gql'), 'utf8'));
+
+// Define resolvers
+const root = {
+  // Define resolver functions for mutations
+  signup: ({ email, password }) => {
+    // Implement signup logic, e.g., insert user into database
+    return { id: 1, email, password };
+  },
+  // Define resolvers for other queries and mutations
+};
+
+// Create a GraphQL HTTP server endpoint
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true, // Enable GraphiQL for testing
+}));
+
 // Start the server
-const port = 3000; // Use a different port than MySQL
+const port = 3000;
 app.listen(port, () => {
   console.log('Server is running on port ' + port);
+});// ... (existing code)
+
+// Route to handle form submission
+app.post('/signup', (req, res) => {
+  const { email, password } = req.body;
+
+  // Hash password before inserting into database
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  connection.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (error, results) => {
+    if (error) {
+      console.error('Error inserting user:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+
+    // ... (remaining signup logic, generate JWT token, etc.)
+  });
 });
+
+// ... (rest of the code)
 

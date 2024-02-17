@@ -4,7 +4,7 @@
   "description": "A simple Express.js application",
   "main": "database.js",
   "scripts": {
-    "start": "node database.js"
+    "start": "node JavaScript/database.js"
   },
   "dependencies": {
     "express": "^4.17.1"

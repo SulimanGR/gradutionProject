@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Signup Page</title>
-    <link rel="stylesheet" href="css/signup-page.css"/>
+    <link rel="stylesheet" href="css/signup-page.css" />
 </head>
 
 <body class="signup-form">
@@ -36,6 +36,34 @@
             </div>
         </div>
     </form>
+
+    <!-- Added script tag to send form data to the server -->
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            // Send form data to the server
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    // Handle the response from the server
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        });
+    </script>
 </body>
 
 </html>

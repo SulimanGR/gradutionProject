@@ -13,5 +13,6 @@
             "database": "auctionUsers",
             "username": "root"
         }
-    ]
+    ],
+    "workbench.editorLargeFileConfirmation": 4096
 }
